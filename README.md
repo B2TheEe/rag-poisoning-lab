@@ -1,10 +1,15 @@
 # rag-poisoning-lab
 
+![status](https://img.shields.io/badge/status-week%200%20scaffold-blue)
+![tests](https://img.shields.io/badge/tests-5%2F5%20passing-brightgreen)
+![owasp](https://img.shields.io/badge/OWASP-LLM01%20%C2%B7%20LLM03%20%C2%B7%20LLM08-orange)
+
 Intentionally vulnerable RAG (retrieval-augmented generation) testbed. Goal: measure
 how indirect prompt injection — instructions embedded in retrieved documents —
 defeats LLM agents, and which defense layers actually work.
 
-**Status:** scaffold (week 1 — design + skeleton). Stubs in place, pytest green.
+**Status:** scaffold (week 0). Skeleton end-to-end, pytest green, real ingest +
+Ollama integration lands in week 1.
 
 Sister lab: [vulnerable-ai-agent-lab](https://github.com/B2TheEe/vulnerable-ai-agent-lab) — direct prompt injection. This repo covers the indirect variant.
 
