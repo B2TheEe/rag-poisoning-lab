@@ -14,9 +14,13 @@ embedding live. Ollama LLM call still stubbed (step B).
 Sister lab: [vulnerable-ai-agent-lab](https://github.com/B2TheEe/vulnerable-ai-agent-lab) — direct prompt injection. This repo covers the indirect variant.
 
 ## OWASP LLM categories covered
+
+Snelle blik: zie [`docs/owasp-coverage.md`](docs/owasp-coverage.md) voor
+de volledige tabel + cross-lab kompas.
+
 - LLM01 indirect prompt injection
-- LLM03 training-data / RAG poisoning
-- LLM08 vector & embedding weaknesses
+- LLM04 data and model poisoning (hoofdscope)
+- LLM08 vector and embedding weaknesses
 
 ## Architecture
 ```
