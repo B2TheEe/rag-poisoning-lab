@@ -1,5 +1,6 @@
 """Smoke tests: import everything, validate payload schema, run stub end-to-end."""
 from __future__ import annotations
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -34,7 +35,7 @@ def test_ingest_stub_runs(tmp_path):
     from src.ingest import ingest
     (tmp_path / "a.md").write_text("hello\n\nworld")
     store = tmp_path / "store.json"
-    result = ingest(tmp_path, store_path=store)
+    result = ingest(tmp_path, store_path=store, use_real=False)
     assert result["count"] == 1
     assert store.exists()
 
@@ -44,7 +45,10 @@ def test_runner_end_to_end_stub(tmp_path, monkeypatch):
     out = tmp_path / "results.txt"
     cmd = [sys.executable, "-m", "src.runner", "--defense", "none",
            "--model", "llama3.1:8b", "--out", str(out)]
-    proc = subprocess.run(cmd, capture_output=True, text=True, cwd=ROOT)
+    # Force stub backend so CI doesn't trip the ~80MB sentence-transformers
+    # download on every push. Real-backend coverage lives in test_ingest_real.py.
+    env = {**os.environ, "RAG_INGEST_BACKEND": "stub"}
+    proc = subprocess.run(cmd, capture_output=True, text=True, cwd=ROOT, env=env)
     assert proc.returncode == 0, proc.stderr
     assert out.exists()
     lines = out.read_text().strip().splitlines()
